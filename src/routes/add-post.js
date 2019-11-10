@@ -11,12 +11,10 @@ export const addPost = (request, response) => {
     post
       .save()
       .then(data => {
-        // console.log(data)
         response.status(200);
         response.json(data)
       })
       .catch(err => {
-        // console.log(err)
         throw new Error(err)
       });
 };
