@@ -1,14 +1,17 @@
 import mongoose from 'mongoose';
 
 function mongoConnect() {
-  const url = process.env.MONGO_URL;
-  const MongoClient = require('mongodb').MongoClient;
-  const client = new MongoClient(url, { 
+  mongoose.connect('mongodb://localhost:27017', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-  });
-  client.connect(() => {
-  });
+  })
+
+  mongoose.connection.on('error', (error) => {
+    console.error(error)
+  })
+  mongoose.connection.on('connected', () => {
+    console.log('connected')
+  })
 }
 
 export { mongoConnect };
